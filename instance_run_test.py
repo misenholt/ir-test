@@ -1,3 +1,5 @@
+import os
+
 import requests
 
 if __name__ == '__main__':
@@ -5,7 +7,10 @@ if __name__ == '__main__':
     file_path = 'test.file'
     data = {'token': 'testtoken'}
     url = 'http://staging.api.simverse.com/v1/files'
-    instance_id = requests.get('http://169.254.169.254/latest/meta-data/instance-id').read().decode()
+    instance_id = requests.get('http://169.254.169.254/latest/meta-data/instance-id')\
+        .read().decode()
+
+    os.rename(file_path, '{}_{}'.format(file_path, instance_id[2:]))
 
     with open(file_path, 'r') as up_file:
         files = {'file': up_file}
