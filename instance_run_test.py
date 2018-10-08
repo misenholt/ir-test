@@ -7,12 +7,13 @@ if __name__ == '__main__':
     file_path = 'test.file'
     data = {'token': 'testtoken'}
     url = 'http://staging.api.simverse.com/v1/files'
-    instance_id = requests.get('http://169.254.169.254/latest/meta-data/instance-id')\
-        .read().decode()
+    instance_id = requests.get('http://169.254.169.254/latest/meta-data/instance-id').content.decode()
+    print(instance_id)
 
-    os.rename(file_path, '{}_{}'.format(file_path, instance_id[2:]))
+    new_file_path = '{}_{}'.format(file_path, instance_id[2:])
+    os.rename(file_path, new_file_path)
 
-    with open(file_path, 'r') as up_file:
+    with open(new_file_path, 'r') as up_file:
         files = {'file': up_file}
         response = requests.put(url,
                                 files=files,
