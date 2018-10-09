@@ -19,5 +19,9 @@ if __name__ == '__main__':
                                 files=files,
                                 data=data
                                 )
-        assert(response.status_code == 201)
+
+    if response.status_code == 201:
+        print('Success')
+    else:
+        raise Exception(response.status_code)
 
