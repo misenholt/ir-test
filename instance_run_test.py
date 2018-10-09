@@ -9,8 +9,9 @@ if __name__ == '__main__':
                             # files=files,
                             data=data
                             )
-    # pprint(response.json())
+
     if response.status_code == 200:
+        pprint(response.json())
         print('Success')
     else:
         raise Exception(response.status_code)
